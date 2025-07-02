@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vertical FAQ Accordion</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background: #f9f9f9;
+  }
+  .accordion {
+    background-color: #fff;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 15px;
+    text-align: left;
+    font-weight: bold;
+    outline: none;
+    transition: background-color 0.3s;
+    display: block;
+    width: 100%;
+  }
+  .accordion:hover {
+    background-color: #f1f1f1;
+  }
+  .panel {
+    display: none;
+    padding: 10px 15px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+  }
+  .options p {
+    margin: 4px 0;
+    padding-left: 10px;
+  }
+  .solution {
+    background: #eef;
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 8px;
+    white-space: pre-wrap;
+  }
+  .answer {
+    margin-top: 6px;
+    font-weight: bold;
+    color: #007BFF;
+  }
+</style>
+</head>
+<body>
+
+<h2>Vertical FAQ Accordion</h2>
+
+<script>
+// Full QnA array (shortened here; keep your 17 questions)
+const qna = [
+  {
+    "number": 1,
+    "question": "Observation of “Rhumann’s purple” is a confirmatory test for the presence of:",
+    "options": ["(1) Starch","(2) Reducing sugar","(3) Cupric ion","(4) Protein"],
+    "solution": "Rhumann’s purple is ninhydrin. It is used to detect alpha-amino acid or carboxylic acid. When reacting with the free amines (proteins), a deep blue or purple color known as Ruhemann’s purple is produced. So observation of “Rhumann’s purple” is a confirmatory test for the presence of protein.\n\nHence option (4) is the answer.",
+    "answer": "(4)"
+  },
+  {
+    "number": 2,
+    "question": "Synthesis of each molecule of glucose in photosynthesis involves:-",
+    "options": ["(1) 18 molecules of ATP","(2) 10 molecules of ATP","(3) 8 molecules of ATP","(4) 6 molecules of ATP"],
+    "solution": "12H2O + 12 NADP + 18 ADP → 6O2 + 18 ATP + 12 NADPH (light reaction)\n6CO2 + 12 NADPH + 18 ATP → C6H12O6 + 12 NADP + 18 ADP + 6H2O (dark reaction)\n6CO2 + 6H2O → C6H12O6 + 6O2 (Net reaction)\n\n18 molecules of ATP is involved in the synthesis of each molecule of glucose in photosynthesis.\n\nHence option (1) is the answer.",
+    "answer": "(1)"
+  }
+  // ← Add the rest of your 17 questions here!
+];
+
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.createElement('div');
+  
+  qna.forEach(item => {
+    const acc = document.createElement('button');
+    acc.className = 'accordion';
+    acc.textContent = item.number + '. ' + item.question;
+    
+    const panel = document.createElement('div');
+    panel.className = 'panel';
+    
+    const optionsDiv = document.createElement('div');
+    optionsDiv.className = 'options';
+    item.options.forEach(opt => {
+      const p = document.createElement('p');
+      p.textContent = opt;
+      optionsDiv.appendChild(p);
+    });
+    
+    const answerDiv = document.createElement('div');
+    answerDiv.className = 'answer';
+    answerDiv.textContent = 'Answer: ' + item.answer;
+    
+    const solutionDiv = document.createElement('div');
+    solutionDiv.className = 'solution';
+    solutionDiv.textContent = item.solution;
+    
+    panel.appendChild(optionsDiv);
+    panel.appendChild(answerDiv);
+    panel.appendChild(solutionDiv);
+    
+    acc.addEventListener('click', () => {
+      acc.classList.toggle('active');
+      panel.style.display = panel.style.display === "block" ? "none" : "block";
+    });
+    
+    container.appendChild(acc);
+    container.appendChild(panel);
+  });
+  
+  document.body.appendChild(container);
+});
+</script>
+
+</body>
+</html>
